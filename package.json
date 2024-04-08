@@ -1,7 +1,6 @@
 {
   "name": "aeonaxy-technologies",
   "version": "1.0.0",
-  "description": "",
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
@@ -18,5 +17,7 @@
     "nodemailer": "^6.9.13",
     "resend": "^3.2.0",
     "validator": "^13.11.0"
-  }
+  },
+  "devDependencies": {},
+  "description": ""
 }
