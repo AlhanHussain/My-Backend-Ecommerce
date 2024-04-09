@@ -7,7 +7,7 @@ const authMiddleware = require('../middleware/authMiddleware');
 router.get('/', CourseController.getCourses);
 
 // CRUD operations for superadmin
-router.post('/', authMiddleware.authenticate,authMiddleware.superadminOnly,  CourseController.createCourse);
+router.post('/', authMiddleware.authenticate,  CourseController.createCourse);
 router.get('/:id', CourseController.getCourseById);
 router.put('/:id', authMiddleware.authenticate, authMiddleware.superadminOnly, CourseController.updateCourse);
 router.delete('/:id', authMiddleware.authenticate, authMiddleware.superadminOnly, CourseController.deleteCourse);

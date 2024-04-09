@@ -1,4 +1,20 @@
 const Course = require('../models/Course');
+const nodemailer = require('nodemailer');
+
+
+
+
+// Create nodemailer transporter
+let transporter = nodemailer.createTransport({
+  host: 'smtp.gmail.com', // Your SMTP server host
+  port: 587, // Port for secure SMTP
+  secure: false, // true for 465, false for other ports
+  auth: {
+      user: 'alhanhussain99@gmail.com', // Your SMTP username
+      pass: 'rthz pvvy qrpk dokr' // Your SMTP password
+  }
+});
+
 
 // Get courses controller with filtering and pagination
 exports.getCourses = async (req, res) => {
@@ -43,6 +59,22 @@ exports.createCourse = async (req, res) => {
       
     });
     await course.save();
+
+    let mailOptions = {
+      from: 'alhanhussain99@gmail.com',
+      to: 'alhanhussain75@gmail.com', // Replace with admin email address
+      subject: 'New Course Created',
+      text: `A new course titled "${title}" has been created.`
+  };
+
+  transporter.sendMail(mailOptions, (error, info) => {
+      if (error) {
+          console.log(error);
+      } else {
+          console.log('Email sent: ' + info.response);
+      }
+  });
+
     res.status(201).json({ message: 'Course created successfully' });
   } catch (error) {
     console.error(error);

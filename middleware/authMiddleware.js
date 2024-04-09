@@ -14,6 +14,7 @@ exports.authenticate = (req, res, next) => {
     req.user = decoded;
     console.log('User:', req.user); // Log user object
 
+
     next();
   } catch (error) {
     console.error(error);

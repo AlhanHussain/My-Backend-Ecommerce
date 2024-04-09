@@ -3,7 +3,20 @@ const jwt = require('jsonwebtoken');
 const User = require('../models/User');
 const validator = require('validator');
 const cloudinary = require('cloudinary').v2; // Import Cloudinary SDK
+const nodemailer = require('nodemailer');
+
 // const { Resend } = require('resend');
+
+// Create a transporter for sending emails
+const transporter = nodemailer.createTransport({
+  host: 'smtp.gmail.com',
+  port: 587,
+  secure: false, // true for 465, false for other ports
+  auth: {
+    user: 'alhanhussain99@gmail.com', // your Gmail email address
+    pass: 'rthz pvvy qrpk dokr' // your app-specific password or account password
+  }
+});
 
 // Initialize Resend with your API key
 // const resend = new Resend('re_211TUpwD_CoeuLejdhvsMhqWpD45BEtG6');
@@ -50,15 +63,29 @@ exports.register = async (req, res) => {
     });
     await user.save();
 
-        // // Send registration email using Resend
+        // Send registration email using Resend
         // const { data, error } = await resend.emails.send({
-        //   from: 'Alhan <v>', // Corrected email address format
+        //   from: 'Name <alhan38.wordpress.com>', // Corrected email address format
         //   to: ['alhanhussain99@gmail.com'], // Enclosed the email address in quotes
         //   subject: 'Welcome to Our App',
         //   html: `Dear ${name},<br/><br/>Thank you for registering with our app.`,
         // });
-        
-    
+       
+            // Send registration email
+    const mailOptions = {
+      from: 'alhanhussain99@gmail.com', // sender address
+      to: 'alhanhussain75@gmail.com', // receiver address
+      subject: 'Welcome to Our App',
+      html: `Dear ${name},<br/><br/>Thank you for registering with our app.`
+    };
+    transporter.sendMail(mailOptions, (error, info) => {
+      if (error) {
+        console.error('Error sending registration email:', error);
+      } else {
+        console.log('Registration email sent successfully');
+      }
+    })
+          
         // // Handle email sending errors
         // if (error) {
         //   console.error('Error sending registration email:', error);
