@@ -56,7 +56,7 @@ exports.enrollCourse = async (req, res) => {
 // View enrolled courses controller
 exports.getEnrolledCourses = async (req, res) => {
   try {
-    const enrollments = await Enrollment.find({ userId: req.user.userId }).populate('courseId');
+    const enrollments = await Enrollment.find({ userId: req.user.userId });
     res.json(enrollments);
     
   } catch (error) {

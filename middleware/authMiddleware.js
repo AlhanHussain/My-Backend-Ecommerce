@@ -5,6 +5,7 @@ exports.authenticate = (req, res, next) => {
   const token = req.header('Authorization');
   console.log('Token:', token); // Log token value
   if (!token) {
+    console.log('Authorization denied: Token not provided');
     return res.status(401).json({ message: 'Authorization denied' });
   }
   try {
@@ -17,18 +18,22 @@ exports.authenticate = (req, res, next) => {
 
     next();
   } catch (error) {
-    console.error(error);
+    console.error('Token verification failed:', error);
     res.status(401).json({ message: 'Invalid token' });
   }
 };
 
+
+
 // authMiddleware.js
 
 // Superadmin authorization middleware
+
 exports.superadminOnly = (req, res, next) => {
   console.log('User Role:', req.user.role); // Log user role
 
     if (req.user.role !== 'superadmin') {
+      console.log('Unauthorized: Superadmin role required');
       return res.status(403).json({ message: 'Unauthorized' });
     }
     next();

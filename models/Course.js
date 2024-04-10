@@ -16,8 +16,7 @@ const courseSchema = new mongoose.Schema({
   popularity: {
     type: Number,
     default: 0
-  }, 
-  // Add other fields as needed
+  }
 } , { versionKey: false } // Setting versionKey option to false
 );
 

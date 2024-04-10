@@ -27,7 +27,7 @@ const transporter = nodemailer.createTransport({
 // User registration controller
 exports.register = async (req, res) => {
   try {
-    const { name, email, password, profilePicture } = req.body;
+    const { name, email, password, profilePicture} = req.body;
     
     // Validate email uniqueness
     const existingUser = await User.findOne({ email });
@@ -59,7 +59,8 @@ exports.register = async (req, res) => {
       name,
       email,
       password: hashedPassword,
-      profilePicture:profilePictureUrl
+      profilePicture:profilePictureUrl,
+
     });
     await user.save();
 
@@ -147,3 +148,4 @@ exports.updateProfile = async (req, res) => {
     res.status(500).json({ message: 'Server Error' });
   }
 };
+

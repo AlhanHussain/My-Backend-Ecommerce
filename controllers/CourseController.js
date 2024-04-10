@@ -29,6 +29,8 @@ exports.getCourses = async (req, res) => {
       if (level) {
         filter.level = level;
       }
+
+      
       const count = await Course.countDocuments(filter);
       const courses = await Course.find(filter)
         .limit(limit)
@@ -62,7 +64,7 @@ exports.createCourse = async (req, res) => {
 
     let mailOptions = {
       from: 'alhanhussain99@gmail.com',
-      to: 'alhanhussain75@gmail.com', // Replace with admin email address
+      to: 'alhanhussain84@gmail.com', // Replace with admin email address
       subject: 'New Course Created',
       text: `A new course titled "${title}" has been created.`
   };
